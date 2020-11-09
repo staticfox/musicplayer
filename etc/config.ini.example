@@ -7,7 +7,7 @@ music_location = ./music
 # a given file. This project was built around mpg321
 # but can be ported to pretty much anything that accepts
 # a file path from stdin.
-player_arg_fmt = mpg321 "%%filepath%%"
+player_arg_fmt = mpg321 %%filepath%%
 
 # You may include additional paths to your music player's
 # binary here.
