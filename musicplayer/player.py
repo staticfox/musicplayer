@@ -45,7 +45,7 @@ class Player(threading.Thread):
         Only play between 7am and 10pm local time if the schedule
         itself is enabled.
         '''
-        if not self._config['schedule']['enabled']:
+        if self._config['schedule'].getboolean('enabled', False) is not True:
             return True
 
         local_tz = pytz.timezone(self._config['schedule']['timezone'])
