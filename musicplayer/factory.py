@@ -16,8 +16,11 @@ from .songdb import SongDB
 def create_app():
     app = Flask(__name__)
 
+    cwd = Path(__file__).parent.absolute()
+    config_file = cwd / '..' / 'etc' / 'config.ini'
+
     config = ConfigParser()
-    config.read('./etc/config.ini')
+    config.read(config_file)
     folder = Path(config['settings']['music_location']).expanduser().resolve()
 
     songdb = SongDB(folder)
