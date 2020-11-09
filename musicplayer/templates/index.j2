@@ -1,0 +1,98 @@
+<html>
+  <header>
+    <title>Music Player</title>
+  </header>
+
+  <script>
+    function httpGet(route) {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+          window.location.reload(false);
+        }
+      }
+      xhr.open('GET', route, true);
+      xhr.send();
+    }
+
+    function setSong(uid) {
+      httpGet('/set_song/' + uid)
+    }
+
+    function stopPlayer() {
+      httpGet('/stop');
+    }
+
+    function startPlayer() {
+      httpGet('/start');
+    }
+
+    function shufflePlaylist() {
+      httpGet('/shuffle');
+    }
+
+    function prevSong() {
+      httpGet('/previous');
+    }
+
+    function reloadPath() {
+      httpGet('/reload_music_dir');
+    }
+  </script>
+
+  <body>
+    <small>
+      <p>
+        * This page does not live reload.
+      </p>
+    </small>
+
+    <p>
+      Schedule: 7am - 10pm central
+    </p>
+
+    <p>
+      Music folder: {{ folder }}
+    </p>
+
+    {% if current_song %}
+      <p>Current song: {{ current_song.display_name }}</p>
+    {% else %}
+      <p>Not playing</p>
+    {% endif %}
+
+    <button type="button" onclick="startPlayer()">Start</button>
+    <button type="button" onclick="stopPlayer()">Stop</button>
+    <button type="button" onclick="startPlayer()">Next</button>
+    <button type="button" onclick="prevSong()">Previous</button>
+    <button type="button" onclick="shufflePlaylist()">Shuffle</button>
+    <button type="button" onclick="reloadPath()">Reload Music Folder</button>
+
+    <p>Playlist - Click song to play</p>
+    <ol>
+      {% for song in songs %}
+        <li onclick='setSong("{{ song.uid }}")'>
+          {{ song.display_name }}
+        </li>
+      {% endfor %}
+    </ol>
+  </body>
+
+  <small>
+    Known issues
+    <ul>
+      <li>
+        Playing songs outside of the schedule will cause the player to stop shortly after.
+      </li>
+      <li>
+        Start / Next / Previous causes the playlist order to become weird.
+      </li>
+      <li>
+        Schedule is not configurable.
+      </li>
+      <li>
+        Path is not configurable.
+      </li>
+    </ul>
+  </small>
+</html>

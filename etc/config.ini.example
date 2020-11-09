@@ -1,0 +1,26 @@
+[settings]
+# This can either be an absolute path or a relative path.
+# ~/ syntax is also accepted and expanded.
+music_location = ./music
+
+# The command used to start the music player with
+# a given file. This project was built around mpg321
+# but can be ported to pretty much anything that accepts
+# a file path from stdin.
+player_arg_fmt = mpg321 "%%filepath%%"
+
+# You may include additional paths to your music player's
+# binary here.
+#path_env_extras =
+#  .
+
+[schedule]
+# Time timezone in which the schedule is run off of.
+# Note that the schedule itself is not configurable yet
+# and must be adjusted within player.py's within_schedule
+# method.
+timezone = America/Chicago
+
+# Whether or not the player should only run on a schedule.
+# It is currently hard coded to 7am and 10pm.
+enabled = False

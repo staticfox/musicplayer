@@ -1,0 +1,4 @@
+FLASK_APP="musicplayer.app"
+FLASK_DEBUG=1
+FLASK_ENV=development
+TEMPLATES_AUTO_RELOAD=False
