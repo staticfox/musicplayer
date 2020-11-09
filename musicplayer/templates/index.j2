@@ -38,12 +38,16 @@
     function reloadPath() {
       httpGet('/reload_music_dir');
     }
+
+    setTimeout(function() {
+      window.location.reload(false);
+    }, 45 * 1000);
   </script>
 
   <body>
     <small>
       <p>
-        * This page does not live reload.
+        * This page reloads every 45 seconds.
       </p>
     </small>
 
