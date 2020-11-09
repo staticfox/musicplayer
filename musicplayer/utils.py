@@ -1,5 +1,6 @@
 from collections import deque
 from os import walk
+from pathlib import Path
 from typing import Deque
 
 import eyed3
@@ -7,7 +8,7 @@ import eyed3
 from .song import Song
 
 
-def load_list(path: str) -> Deque[Song]:
+def load_list(path: Path) -> Deque[Song]:
     song_list = deque()
 
     for root, dirs, files in walk(path):
