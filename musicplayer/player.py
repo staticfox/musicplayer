@@ -26,7 +26,7 @@ class Player(threading.Thread):
         self._config = config
 
     @property
-    def playing(self):
+    def playing(self) -> bool:
         if self._player is None:
             # Player not running
             return False
@@ -40,7 +40,7 @@ class Player(threading.Thread):
         return True
 
     @property
-    def within_schedule(self):
+    def within_schedule(self) -> bool:
         '''
         Only play between 7am and 10pm local time if the schedule
         itself is enabled.
@@ -54,7 +54,7 @@ class Player(threading.Thread):
             return True
         return False
 
-    def play_song(self, song: Song):
+    def play_song(self, song: Song) -> None:
         self._changing_songs = True
 
         for path in self._config['settings'].get('path_env_extras', []):
@@ -81,17 +81,17 @@ class Player(threading.Thread):
 
         self._changing_songs = False
 
-    def play_next(self):
+    def play_next(self) -> None:
         self._paused = False
 
         next_song = self._songdb.next()
         self.play_song(next_song)
 
-    def play_previous(self):
+    def play_previous(self) -> None:
         next_song = self._songdb.prev()
         self.play_song(next_song)
 
-    def stop_music(self):
+    def stop_music(self) -> None:
         self._paused = True
 
         if self._player:
@@ -105,7 +105,7 @@ class Player(threading.Thread):
 
         self._songdb.set_current(None)
 
-    def run(self):
+    def run(self) -> None:
         while self._running:
             if self._paused:
                 sleep(0.01)

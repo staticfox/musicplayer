@@ -1,12 +1,13 @@
 from collections import deque
 from os import walk
+from typing import Deque
 
 import eyed3
 
 from .song import Song
 
 
-def load_list(path: str):
+def load_list(path: str) -> Deque[Song]:
     song_list = deque()
 
     for root, dirs, files in walk(path):

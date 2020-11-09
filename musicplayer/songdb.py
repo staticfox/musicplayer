@@ -1,8 +1,8 @@
 from pathlib import Path
 from random import shuffle
 from typing import (
+    Deque,
     Generator,
-    List,
     Optional,
 )
 
@@ -21,8 +21,8 @@ class SongDB(object):
 
     def load_path(self) -> None:
         song_list = load_list(self._path)
-        shuffle(song_list)
         self.set_list(song_list)
+        self.shuffle()
 
     def next(self) -> Optional[Song]:
         if not self._song_list:
@@ -48,7 +48,7 @@ class SongDB(object):
     def get_current(self) -> Song:
         return self._current
 
-    def set_list(self, song_list) -> List[Song]:
+    def set_list(self, song_list: Deque[Song]) -> None:
         self._song_list = song_list
 
     def get_songs(self) -> Generator[Song, None, None]:
